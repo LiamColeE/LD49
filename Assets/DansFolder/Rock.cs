@@ -15,6 +15,7 @@ public class Rock : MonoBehaviour
     {
         meshCollider = GetComponent<MeshCollider>();
         mesh = GetComponent<MeshFilter>();
+        Debug.Log(mesh.mesh);
     }
 
     void Start()
