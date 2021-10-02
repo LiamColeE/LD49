@@ -16,19 +16,19 @@ public class HeightTracker : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider collider)
+    {
+        if(collider == lastRock)
+        {
+            Debug.Log("You in there bro");
+        }
+    }
+
     void OnTriggerExit(Collider collider)
     {
         if(collider.CompareTag("Rock"))
         {
            lastRock = null;
-        }
-    }
-
-    void Update()
-    {
-        if(lastRock != null)
-        {
-            
         }
     }
 
