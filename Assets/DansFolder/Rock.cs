@@ -40,7 +40,8 @@ public class Rock : MonoBehaviour
         {
             Rock collidingRock = collision.gameObject.GetComponent<Rock>();
 
-            
+            Debug.DrawRay(transform.position, collision.contacts[0].point, Color.magenta, 3);
+
         }
     }
 
