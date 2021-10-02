@@ -88,7 +88,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnZoom(InputValue value)
     {
-        depth = Mathf.Clamp(depth - (float)value.Get() * 0.005f, 1, 15);
+        depth = Mathf.Clamp(depth - (float)value.Get() * 0.001f, 1, 15);
     }
 
     public void OnMove(InputValue value)
