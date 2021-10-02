@@ -47,9 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5613299235814ff4ab4a94042f2b2ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  locked: 0
+  settled: 0
   meshPool:
   - {fileID: -317926821362609642, guid: 82f056fd79359334ab71cb703077562b, type: 3}
+  - {fileID: -2605931710798131250, guid: d27fc6b97679ed844ad0b43d6e4f3277, type: 3}
   - {fileID: 4013275331872712965, guid: 3eccd6a9990ae73488be9ce0339539eb, type: 3}
+  - {fileID: 8330653076614499142, guid: ad11d07a5a4720d4b94d7e9d332454f8, type: 3}
+  settledThreshold: 0.1
 --- !u!33 &6496827646827146075
 MeshFilter:
   m_ObjectHideFlags: 0

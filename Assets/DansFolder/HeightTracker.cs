@@ -5,30 +5,20 @@ using UnityEngine;
 public class HeightTracker : MonoBehaviour
 {
     [SerializeField] Transform ground;
+    [SerializeField] int points;
 
     Rock lastRock;
+    Rock thisRock;
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay(Collider collider)
     {
         if(collider.CompareTag("Rock"))
         {
-           lastRock = collider.GetComponent<Rock>();
-        }
-    }
+            if(collider.GetComponent<Rock>().settled)
+            {
 
-    void OnTriggerExit(Collider collider)
-    {
-        if(collider.CompareTag("Rock"))
-        {
-           lastRock = null;
-        }
-    }
-
-    void Update()
-    {
-        if(lastRock != null)
-        {
-            
+                Debug.Log(collider.GetComponent<Rock>().settled + "Cairn is at height " + (transform.position.y - ground.transform.position.y) + " and you got " + points + " points!");
+            }
         }
     }
 
