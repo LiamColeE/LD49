@@ -65,13 +65,16 @@ public class DragAndDrop : MonoBehaviour
                 Rigidbody rockrb = target.GetComponent<Rigidbody>();
 
                 rockrb.useGravity = false;
-                rockrb.velocity = Vector3.zero;
+                rockrb.isKinematic = true;
                 hasRock = true;
             }
         }
         else
         {
-            target.GetComponent<Rigidbody>().useGravity = true;
+            Rigidbody rockrb = target.GetComponent<Rigidbody>();
+            rockrb.useGravity = true;
+            rockrb.isKinematic = false;
+
             _mouseState = false;
             hasRock = false;
         }
@@ -86,5 +89,10 @@ public class DragAndDrop : MonoBehaviour
     public void OnZoom(InputValue value)
     {
         depth = Mathf.Clamp(depth - (float)value.Get() * 0.005f, 1, 15);
+    }
+
+    public void OnMove(InputValue value)
+    {
+
     }
 }
