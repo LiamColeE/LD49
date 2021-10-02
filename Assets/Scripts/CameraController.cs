@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour
     public float zoomScale;
     private float zoom = 1;
 
+    private bool controlActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +29,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DragAndDrop.instance.hasRock)
-            return;
+        //if (DragAndDrop.instance.hasRock)
+        //    return;
 
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
         transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
@@ -46,14 +48,24 @@ public class CameraController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
+        if (!controlActive)
+        {
+            moveVector = Vector2.zero;
+            return;
+        }
         moveVector = (Vector2)value.Get();
     }
 
     public void OnZoom(InputValue value)
     {
-        if (DragAndDrop.instance.hasRock)
+        if (DragAndDrop.instance.hasRock || !controlActive)
             return;
 
-        zoom = Mathf.Clamp(zoom - (float)value.Get() * zoomScale,1,10);
+        zoom = Mathf.Clamp(zoom + (float)value.Get() * zoomScale,1,10);
+    }
+
+    public void OnToggleControls()
+    {
+        controlActive = !controlActive;
     }
 }

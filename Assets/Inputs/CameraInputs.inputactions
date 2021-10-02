@@ -36,6 +36,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleControls",
+                    "type": "Button",
+                    "id": "d5d3e233-b6ab-40ec-964b-5fc45df9b9a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -201,6 +209,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MousePos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d5f6742-3417-4c0a-b6fe-7c91c2cd175a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ToggleControls",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

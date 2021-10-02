@@ -12,6 +12,9 @@ public class DragAndDrop : MonoBehaviour
     public bool hasRock;
     private Vector2 mousePos;
     public float depth;
+    private Vector2 rotationVector;
+
+    private bool controlActive = false;
 
     // Use this for initialization
     void Start()
@@ -30,8 +33,10 @@ public class DragAndDrop : MonoBehaviour
             //convert the screen mouse position to world point and adjust with offset
             var curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
 
+
             //update the position of the object in the world
             target.transform.position = curPosition;
+            target.transform.Rotate(rotationVector);
         }
     }
 
@@ -88,11 +93,25 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnZoom(InputValue value)
     {
+        if (!controlActive)
+        {
+            return;
+        }
         depth = Mathf.Clamp(depth - (float)value.Get() * 0.001f, 1, 15);
     }
 
     public void OnMove(InputValue value)
     {
+        if (!controlActive)
+        {
+            rotationVector = Vector2.zero;
+            return;
+        }
+        rotationVector = value.Get<Vector2>();
+    }
 
+    public void OnToggleControls()
+    {
+        controlActive = !controlActive;
     }
 }

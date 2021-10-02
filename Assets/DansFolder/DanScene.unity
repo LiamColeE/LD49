@@ -298,6 +298,7 @@ MonoBehaviour:
   screenSpace: {x: 0, y: 0, z: 0}
   offset: {x: 0, y: 0, z: 0}
   hasRock: 0
+  depth: 0
 --- !u!1 &1899421427
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904859274606519156, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.99
       objectReference: {fileID: 0}
     - target: {fileID: 5904859274606519156, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -644,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904859274606519156, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.87
       objectReference: {fileID: 0}
     - target: {fileID: 5904859274606519156, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -680,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904859274606519159, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
       propertyPath: spawnRate
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72fa542a9edb94b489bf3f7e87bb81ef, type: 3}
