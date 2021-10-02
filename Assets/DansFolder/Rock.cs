@@ -27,12 +27,21 @@ public class Rock : MonoBehaviour
 
         mesh.mesh = meshPool[meshIndex];
         meshCollider.sharedMesh = mesh.mesh;
-
     }
 
     void Update()
     {
         settled = Mathf.Abs(rb.velocity.magnitude) < settledThreshold;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Rock"))
+        {
+            Rock collidingRock = collision.gameObject.GetComponent<Rock>();
+
+            
+        }
     }
 
 
