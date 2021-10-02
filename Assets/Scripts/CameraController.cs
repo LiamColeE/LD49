@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
-        transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.World);
+        transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
 
         Vector3 eulers = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(new Vector3(Mathf.Clamp(eulers.x, cameraLimits.x, cameraLimits.y), eulers.y, eulers.z));
