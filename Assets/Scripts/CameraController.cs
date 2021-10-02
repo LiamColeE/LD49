@@ -27,6 +27,9 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DragAndDrop.instance.hasRock)
+            return;
+
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
         transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
 
@@ -37,7 +40,7 @@ public class CameraController : MonoBehaviour
 
         //move camera to the zoom position
         Vector3 desiredPos = transform.position;
-        desiredPos += new Vector3(0,0, zoom);
+        desiredPos += new Vector3(0, 0, zoom);
         camera.localPosition = desiredPos;
     }
 
@@ -48,6 +51,9 @@ public class CameraController : MonoBehaviour
 
     public void OnZoom(InputValue value)
     {
+        if (DragAndDrop.instance.hasRock)
+            return;
+
         zoom = Mathf.Clamp(zoom - (float)value.Get() * zoomScale,1,10);
     }
 }
