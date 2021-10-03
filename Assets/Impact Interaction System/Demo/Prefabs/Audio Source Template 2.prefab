@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4754870125685758}
   - component: {fileID: 82749373903207040}
   - component: {fileID: 114456777820375924}
+  - component: {fileID: 5084764452023573017}
   m_Layer: 0
   m_Name: Audio Source Template 2
   m_TagString: Untagged
@@ -142,3 +143,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 82749373903207040}
   _poolSize: 20
+  _poolFallbackMode: 1
+--- !u!164 &5084764452023573017
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353401264174270}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: 0
+  m_RoomHF: 0
+  m_DecayTime: 1
+  m_DecayHFRatio: 0.5
+  m_ReflectionsLevel: -10000
+  m_ReverbLevel: 0
+  m_ReverbDelay: 0.04
+  m_Diffusion: 100
+  m_Density: 100
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: 0
+  m_ReverbPreset: 27
