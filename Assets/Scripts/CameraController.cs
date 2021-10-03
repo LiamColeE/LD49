@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
 
     public float moveSpeed;
     private Vector2 moveVector;
-    private float verticalMovement;
 
     public float zoomScale;
     private float zoom = 1;
@@ -27,7 +26,6 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera.LookAt(transform.position);
     }
 
     // Update is called once per frame
@@ -44,9 +42,7 @@ public class CameraController : MonoBehaviour
         Vector3 eulers = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(new Vector3(Mathf.Clamp(eulers.x, cameraLimits.x, cameraLimits.y), eulers.y, eulers.z));
 
-        transform.Translate(0, verticalMovement * Time.deltaTime * moveSpeed/2,0, Space.World);
-
-        //camera.LookAt(transform.position);
+        camera.LookAt(transform.position);
 
         //move camera to the zoom position
         Vector3 desiredPos = transform.position;
@@ -87,10 +83,5 @@ public class CameraController : MonoBehaviour
     {
         endMenu.gameObject.SetActive(false);
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-    }
-
-    public void OnVerticalMove(InputValue value)
-    {
-        verticalMovement = value.Get<float>();
     }
 }
