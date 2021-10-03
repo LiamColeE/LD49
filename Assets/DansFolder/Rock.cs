@@ -56,12 +56,12 @@ public class Rock : MonoBehaviour
 
         if(root || rooted)
         {
-            ps.Play();
+            ps.Stop();
             //material.color = Color.green;
         }
         else
         {
-            ps.Stop();
+            ps.Play();
             //material.color = startColor;
         }
 
