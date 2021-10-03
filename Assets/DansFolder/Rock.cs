@@ -6,6 +6,8 @@ public class Rock : MonoBehaviour
 {
     public bool locked;
     public bool settled;
+    public bool rooted;
+    public List<Rock> connectedRocks = new List<Rock>();
 
     [SerializeField] Mesh[] meshPool;
     [SerializeField] float settledThreshold;
@@ -13,12 +15,16 @@ public class Rock : MonoBehaviour
     MeshFilter mesh;
     MeshCollider meshCollider;
     Rigidbody rb;
+    Material material;
+    Color startColor;
 
     void Awake()
     {
         meshCollider = GetComponent<MeshCollider>();
         mesh = GetComponent<MeshFilter>();
         rb = GetComponent<Rigidbody>();
+        material = GetComponent<MeshRenderer>().material;
+        startColor = material.color;
     }
 
     void Start()
@@ -32,18 +38,58 @@ public class Rock : MonoBehaviour
     void Update()
     {
         settled = Mathf.Abs(rb.velocity.magnitude) < settledThreshold;
+
+        if(rooted)
+        {
+            material.color = Color.green;
+        }
+        else
+        {
+            material.color = startColor;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Rock"))
         {
-            Rock collidingRock = collision.gameObject.GetComponent<Rock>();
-
-            Debug.DrawRay(transform.position, collision.contacts[0].point, Color.magenta, 3);
-
+            Rock collidedRock = collision.gameObject.GetComponent<Rock>();
+            if(collidedRock.rooted)
+            {
+                connectedRocks.Add(collidedRock);
+            }
         }
     }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Root"))
+        {
+            rooted = true;
+        }
+        else if(collision.gameObject.CompareTag("Rock"))
+        {
+            rooted = collision.gameObject.GetComponent<Rock>().rooted == true;
+        }
+        else
+        {
+            rooted = false;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Rock"))
+        {
+            Rock collidedRock = collision.gameObject.GetComponent<Rock>();
+            if(connectedRocks.Contains(collidedRock))
+            {
+                connectedRocks.Remove(collidedRock);
+            }
+        }
+    }
+
+
 
 
 
