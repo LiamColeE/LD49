@@ -6,6 +6,7 @@ public class Rock : MonoBehaviour
 {
     public bool locked;
     public bool settled;
+
     public bool rooted;
     public bool root;
     public List<Rock> connectedRocks = new List<Rock>();
