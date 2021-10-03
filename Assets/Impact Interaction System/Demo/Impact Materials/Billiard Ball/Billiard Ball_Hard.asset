@@ -49,8 +49,24 @@ MonoBehaviour:
   _collisionNormalInfluence: 1
   _slideVelocityPitchMultiplier: 0.085
   _audioSourceTemplate: {fileID: 114456777820375924, guid: 8429ad35d236db547b3385d9ecafec89, type: 3}
-  _collisionAudioSelectionMode: 0
+  _collisionAudioSelectionMode: 1
   _collisionAudioClips:
-  - {fileID: 8300000, guid: 8de41a133daf2a74cacde87a70e4d00b, type: 3}
+  - {fileID: 8300000, guid: 29c3184821a18fb4fa8a425e360e4689, type: 3}
+  - {fileID: 8300000, guid: be496da5e85cc39468f411b75f40f815, type: 3}
+  - {fileID: 8300000, guid: 2915b576f687636429e8b1ec3ea2d09e, type: 3}
+  - {fileID: 8300000, guid: 839efa2ea59de9d4bb06c8752101e08d, type: 3}
+  - {fileID: 8300000, guid: d10e082f1dbf9b947a4661ee860c651a, type: 3}
+  - {fileID: 8300000, guid: 2125561f6b2cc0d4cbf2456d3dbf48b1, type: 3}
+  - {fileID: 8300000, guid: a5242a223ed5362429ff5f531ee8b5f8, type: 3}
+  - {fileID: 8300000, guid: 421aac07f0b6a8e4e8459644eea0aeb3, type: 3}
+  - {fileID: 8300000, guid: 996d3488b54c57e46a269ecf3a1e093c, type: 3}
+  - {fileID: 8300000, guid: 164b9ebb578c2994eb5e0421d0e2843a, type: 3}
+  - {fileID: 8300000, guid: 4f14b6403d6aa984d85d6efcebea8d6f, type: 3}
+  - {fileID: 8300000, guid: 6d61c8eede6663d4995d56a9a2e7ecef, type: 3}
+  - {fileID: 8300000, guid: 73954452acc320242a71810eab104221, type: 3}
+  - {fileID: 8300000, guid: 4773b3f8075c7f441a36d332c0314055, type: 3}
+  - {fileID: 8300000, guid: bedcc58a6b9ac7a40ad8f92fd3769c90, type: 3}
+  - {fileID: 8300000, guid: 0800b12af699e2641be800bda408090b, type: 3}
+  - {fileID: 8300000, guid: ce4947ecf8a4888429a921f5d25cb99a, type: 3}
   _slideAudioClip: {fileID: 8300000, guid: 53a582852bbf6834c8ed666af81808a1, type: 3}
   _rollAudioClip: {fileID: 8300000, guid: ad29cff7221a04f4bb922bf0cb36cd35, type: 3}

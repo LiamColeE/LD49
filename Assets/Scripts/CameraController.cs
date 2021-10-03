@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    public EndMenu endMenu;
+
     [Tooltip("The camera")]
     [SerializeField]
     private Transform camera;
@@ -15,6 +17,7 @@ public class CameraController : MonoBehaviour
 
     public float moveSpeed;
     private Vector2 moveVector;
+    private float verticalMovement;
 
     public float zoomScale;
     private float zoom = 1;
@@ -24,6 +27,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camera.LookAt(transform.position);
     }
 
     // Update is called once per frame
@@ -32,13 +36,17 @@ public class CameraController : MonoBehaviour
         //if (DragAndDrop.instance.hasRock)
         //    return;
 
+        //transform.position = new Vector3(transform.position.x, (int)GameManager.instance.totalHeight, transform.position.z);
+
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
         transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
 
         Vector3 eulers = transform.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(new Vector3(Mathf.Clamp(eulers.x, cameraLimits.x, cameraLimits.y), eulers.y, eulers.z));
 
-        camera.LookAt(transform.position);
+        transform.Translate(0, verticalMovement * Time.deltaTime * moveSpeed/2,0, Space.World);
+
+        //camera.LookAt(transform.position);
 
         //move camera to the zoom position
         Vector3 desiredPos = transform.position;
@@ -67,5 +75,22 @@ public class CameraController : MonoBehaviour
     public void OnToggleControls()
     {
         controlActive = !controlActive;
+    }
+
+    public void OnOpenMenu()
+    {
+        endMenu.gameObject.SetActive(true);
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+    }
+
+    public void OnCloseMenu()
+    {
+        endMenu.gameObject.SetActive(false);
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+    }
+
+    public void OnVerticalMove(InputValue value)
+    {
+        verticalMovement = value.Get<float>();
     }
 }

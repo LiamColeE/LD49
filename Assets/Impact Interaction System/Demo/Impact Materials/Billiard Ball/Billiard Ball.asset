@@ -43,4 +43,18 @@ MonoBehaviour:
       ExactMatch: 0
     _interactions:
     - {fileID: 11400000, guid: ed115e4e154d6c14bbbbd9318e30a1dd, type: 2}
-  _fallbackInteractionSetIndex: 0
+  - _name: New Interaction Set
+    _includeTagsFilter:
+      TagMask:
+        _value: 0
+        _tagLibrary: {fileID: 0}
+      ExactMatch: 0
+    _excludeTagsFilter:
+      TagMask:
+        _value: 0
+        _tagLibrary: {fileID: 0}
+      ExactMatch: 0
+    _interactions: []
+  _fallbackTagMask:
+    _value: 0
+    _tagLibrary: {fileID: 0}
