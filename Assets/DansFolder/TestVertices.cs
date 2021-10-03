@@ -7,38 +7,38 @@ public class TestVertices : MonoBehaviour
 
     Mesh mesh;
 
-    void Awake()
+    void Start()
     {
         mesh = GetComponent<MeshFilter>().mesh;
     }
-    
-    void Update()
+
+    void OnDrawGizmos()
     {
-        Debug.DrawLine(transform.position, GetTrueHeight(), Color.magenta, 0.5f);
+        Gizmos.DrawSphere(GetTrueHeight(), 0.1f);
     }
+ 
 
     public Vector3 GetTrueHeight()
     {
         
-        Vector3 highestPoint = GetCenterToVertex(mesh.vertices[0]);
+        Vector3 highestPoint = Vector3.negativeInfinity;
         foreach(Vector3 vertex in mesh.vertices)
         {
-            if(GetCenterToVertex(vertex).y > highestPoint.y)
+            if(WorldVertex(vertex).y > highestPoint.y)
             {
-                highestPoint = GetCenterToVertex(vertex);
-            }
-            
+                highestPoint = WorldVertex(vertex);
+            } 
         }
 
         return highestPoint;
     }
 
-    public Vector3 GetCenterToVertex(Vector3 vertex)
+    public Vector3 WorldVertex(Vector3 vertex)
     {
-        Vector3 p = transform.position;
-        Vector3 v = new Vector3(vertex.x * transform.localScale.x, vertex.y * transform.localScale.y, vertex.z * transform.localScale.z);
-        Vector3 r = transform.rotation.eulerAngles;
-        Quaternion q = Quaternion.Euler(r);
-        return p - (q * v);
+        var localToWorld = transform.localToWorldMatrix;
+        
+        return localToWorld.MultiplyPoint3x4(vertex);
     }
+
+
 }
