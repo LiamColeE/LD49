@@ -13141,6 +13141,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7995239491621201537, guid: 4de5897810de2894e987a72eb3e74d11, type: 3}
+      propertyPath: songs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995239491621201537, guid: 4de5897810de2894e987a72eb3e74d11, type: 3}
+      propertyPath: songs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dabd6cd79a91b6e428281e221609453e, type: 3}
+    - target: {fileID: 7995239491621201537, guid: 4de5897810de2894e987a72eb3e74d11, type: 3}
+      propertyPath: songs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: b34e10c33de23cf43a54b8c0288f16e7, type: 3}
     - target: {fileID: 7995239491621201550, guid: 4de5897810de2894e987a72eb3e74d11, type: 3}
       propertyPath: m_Name
       value: MusicManager
