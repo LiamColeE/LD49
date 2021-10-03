@@ -60,7 +60,6 @@ public class Rock : MonoBehaviour
             Rock collidedRock = collision.gameObject.GetComponent<Rock>();
             connectedRocks.Add(collidedRock);
             
-            
             SetConnectedRocksAsRooted(new List<Rock>(), LookForRoot(new List<Rock>()));
         }
 
@@ -78,7 +77,6 @@ public class Rock : MonoBehaviour
             if(connectedRocks.Contains(collidedRock))
             {
                 connectedRocks.Remove(collidedRock);
-
                 SetConnectedRocksAsRooted(new List<Rock>(), LookForRoot(new List<Rock>()));
             }
         }
