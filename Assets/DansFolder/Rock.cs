@@ -21,6 +21,8 @@ public class Rock : MonoBehaviour
     Rigidbody rb;
     Material material;
     Color startColor;
+    ParticleSystem ps;
+    ParticleSystemRenderer psr;
 
     void Awake()
     {
@@ -29,6 +31,8 @@ public class Rock : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         material = GetComponent<MeshRenderer>().material;
         startColor = material.color;
+        ps = GetComponent<ParticleSystem>();
+        psr = GetComponent<ParticleSystemRenderer>();
     }
 
     void Start()
@@ -37,6 +41,7 @@ public class Rock : MonoBehaviour
 
         mesh.mesh = meshPool[meshIndex];
         meshCollider.sharedMesh = mesh.mesh;
+        psr.mesh = mesh.mesh;
     }
 
     void Update()
@@ -45,12 +50,15 @@ public class Rock : MonoBehaviour
 
         if(root || rooted)
         {
-            material.color = Color.green;
+            ps.Play();
+            //material.color = Color.green;
         }
         else
         {
-            material.color = startColor;
+            ps.Stop();
+            //material.color = startColor;
         }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -129,10 +137,5 @@ public class Rock : MonoBehaviour
            this.rooted = rooted;
         }
     }
-
-
-
-
-
 
 }

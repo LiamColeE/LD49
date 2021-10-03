@@ -7,7 +7,9 @@ public class RockSpawner : MonoBehaviour
     [SerializeField] bool autoSpawn;
     [SerializeField] float spawnRate;
     [SerializeField] Rock rockPrefab;
+    [SerializeField] int spawnLimit;
 
+    int mySpawnTotal;
     void Start()
     {
         if(autoSpawn)
@@ -20,15 +22,22 @@ public class RockSpawner : MonoBehaviour
 
         Spawn(transform.position);
 
-        StartCoroutine(AutoSpawn());
+        if(mySpawnTotal < spawnLimit)
+            StartCoroutine(AutoSpawn());
     }
 
     public void Spawn(Vector3 spawnPosition)
     {
-        Rock newRock = Instantiate(rockPrefab);
-        
-        newRock.transform.position = spawnPosition;
+        if(mySpawnTotal < spawnLimit)
+        {
+            Rock newRock = Instantiate(rockPrefab);
+            
+            newRock.transform.position = spawnPosition;
+
+            mySpawnTotal++;
+        }
     }
+
 
 
 }
