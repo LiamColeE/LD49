@@ -36,7 +36,7 @@ public class DragAndDrop : MonoBehaviour
 
             //update the position of the object in the world
             target.transform.position = curPosition;
-            target.transform.Rotate(new Vector3(rotationVector.x, 0, rotationVector.y));
+            target.transform.Rotate(new Vector3(0, rotationVector.y, rotationVector.x), Space.World);
         }
     }
 
