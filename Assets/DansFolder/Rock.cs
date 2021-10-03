@@ -50,6 +50,7 @@ public class Rock : MonoBehaviour
         {
             material.color = startColor;
         }
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -128,10 +129,5 @@ public class Rock : MonoBehaviour
            this.rooted = rooted;
         }
     }
-
-
-
-
-
 
 }
