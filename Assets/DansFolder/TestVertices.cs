@@ -34,6 +34,20 @@ public class TestVertices : MonoBehaviour
         return highestPoint;
     }
 
+    public float GetFurthestPoint(Vector3 position)
+    {
+        float furthestPoint = 0;
+        foreach (Vector3 vertex in mesh.vertices)
+        {
+            float distance = Vector3.Distance(position, vertex);
+            if (distance > furthestPoint)
+            {
+                furthestPoint = distance;
+            }
+        }
+        return furthestPoint;
+    }
+
     public Vector3 WorldVertex(Vector3 vertex)
     {
         var localToWorld = transform.localToWorldMatrix;

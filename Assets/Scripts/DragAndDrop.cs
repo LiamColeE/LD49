@@ -27,6 +27,8 @@ public class DragAndDrop : MonoBehaviour
     {
         if (_mouseState)
         {
+            RaycastHit hit;
+            depth = GetDistanceToNonRockObject(out hit);
             //keep track of the mouse position
             var curScreenSpace = new Vector3(mousePos.x, mousePos.y, depth);
 
@@ -52,6 +54,34 @@ public class DragAndDrop : MonoBehaviour
         }
 
         return target;
+    }
+
+    float GetDistanceToNonRockObject(out RaycastHit hit)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        LayerMask mask = LayerMask.GetMask("Rock");
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, depth, ~mask))
+        {
+            Debug.Log("object hit" + hit.transform.gameObject.name);
+            float distance = Vector3.Distance(Camera.main.transform.position, hit.point);
+            return distance - GetFarSideOfRock(ray.direction);
+        }
+        return depth;
+    }
+
+    float GetFarSideOfRock(Vector3 rayDirection)
+    {
+        RaycastHit hit;
+        Vector3 testPoint = target.transform.position + rayDirection * 3;
+        Vector3 flippedDirection = rayDirection * -1;
+        LayerMask mask = LayerMask.GetMask("Rock");
+        if (Physics.Raycast(testPoint, flippedDirection, out hit, 3, mask))
+        {
+            Debug.Log("object hit" + hit.transform.gameObject.name);
+            float distance = Vector3.Distance(target.transform.position, hit.point);
+            return distance;
+        }
+        return 0;
     }
 
     public void OnClick(InputValue value)
