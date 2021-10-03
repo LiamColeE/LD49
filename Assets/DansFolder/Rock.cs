@@ -14,6 +14,7 @@ public class Rock : MonoBehaviour
     
 
     [SerializeField] Mesh[] meshPool;
+    [SerializeField] Material[] materialPool;
     [SerializeField] float settledThreshold;
 
     MeshFilter mesh;
@@ -23,6 +24,7 @@ public class Rock : MonoBehaviour
     Color startColor;
     ParticleSystem ps;
     ParticleSystemRenderer psr;
+    MeshRenderer meshRenderer;
 
     void Awake()
     {
@@ -33,13 +35,17 @@ public class Rock : MonoBehaviour
         startColor = material.color;
         ps = GetComponent<ParticleSystem>();
         psr = GetComponent<ParticleSystemRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     void Start()
     {
         int meshIndex = Random.Range(0, meshPool.Length);
+        int materialIndex = Random.Range(0, materialPool.Length);
 
         mesh.mesh = meshPool[meshIndex];
+
+        meshRenderer.material = materialPool[materialIndex];
         meshCollider.sharedMesh = mesh.mesh;
         psr.mesh = mesh.mesh;
     }
