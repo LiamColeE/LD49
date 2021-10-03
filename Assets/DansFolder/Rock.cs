@@ -7,7 +7,10 @@ public class Rock : MonoBehaviour
     public bool locked;
     public bool settled;
     public bool rooted;
+    public bool root;
     public List<Rock> connectedRocks = new List<Rock>();
+
+    
 
     [SerializeField] Mesh[] meshPool;
     [SerializeField] float settledThreshold;
@@ -39,7 +42,7 @@ public class Rock : MonoBehaviour
     {
         settled = Mathf.Abs(rb.velocity.magnitude) < settledThreshold;
 
-        if(rooted)
+        if(root || rooted)
         {
             material.color = Color.green;
         }
@@ -53,27 +56,17 @@ public class Rock : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Rock"))
         {
-            Rock collidedRock = collision.gameObject.GetComponent<Rock>();
-            if(collidedRock.rooted)
-            {
-                connectedRocks.Add(collidedRock);
-            }
-        }
-    }
 
-    void OnCollisionStay(Collision collision)
-    {
+            Rock collidedRock = collision.gameObject.GetComponent<Rock>();
+            connectedRocks.Add(collidedRock);
+            
+            
+            SetConnectedRocksAsRooted(new List<Rock>(), LookForRoot(new List<Rock>()));
+        }
+
         if(collision.gameObject.CompareTag("Root"))
         {
-            rooted = true;
-        }
-        else if(collision.gameObject.CompareTag("Rock"))
-        {
-            rooted = collision.gameObject.GetComponent<Rock>().rooted == true;
-        }
-        else
-        {
-            rooted = false;
+            root = true;
         }
     }
 
@@ -85,9 +78,59 @@ public class Rock : MonoBehaviour
             if(connectedRocks.Contains(collidedRock))
             {
                 connectedRocks.Remove(collidedRock);
+
+                SetConnectedRocksAsRooted(new List<Rock>(), LookForRoot(new List<Rock>()));
             }
         }
+
+        if(collision.gameObject.CompareTag("Root"))
+        {
+            root = false;
+        }
     }
+
+    public bool LookForRoot(List<Rock> visited)
+    {
+        foreach(Rock rock in connectedRocks)
+        {
+
+            if(!visited.Contains(rock))
+            {
+                visited.Add(rock);
+                if(!rock.root)
+                {
+                    if(rock.LookForRoot(visited))
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void SetConnectedRocksAsRooted(List<Rock> visited, bool rooted)
+    {
+        foreach(Rock rock in connectedRocks)
+        {
+            if(!visited.Contains(rock))
+            {
+                visited.Add(rock);
+                rock.rooted = rooted;
+                SetConnectedRocksAsRooted(visited, rooted);
+            }
+        }
+
+        if(connectedRocks.Count == 0)
+        {
+           this.rooted = rooted;
+        }
+    }
+
 
 
 
