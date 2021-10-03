@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    public EndMenu endMenu;
+
     [Tooltip("The camera")]
     [SerializeField]
     private Transform camera;
@@ -69,5 +71,17 @@ public class CameraController : MonoBehaviour
     public void OnToggleControls()
     {
         controlActive = !controlActive;
+    }
+
+    public void OnOpenMenu()
+    {
+        endMenu.gameObject.SetActive(true);
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+    }
+
+    public void OnCloseMenu()
+    {
+        endMenu.gameObject.SetActive(false);
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
 }

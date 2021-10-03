@@ -74,6 +74,12 @@ MonoBehaviour:
   - {fileID: -5515135430476711569, guid: 9bb58bf010c353349b30b6827d09adf0, type: 3}
   - {fileID: -8827430047998774373, guid: f6b88991c86d4af4fb367cb1dde92897, type: 3}
   - {fileID: 7728203414492068431, guid: efaac8a7e03418343ba3f373097ba3a7, type: 3}
+  materialPool:
+  - {fileID: 2100000, guid: c591c09130f1f0549bfa22f81b04a4d0, type: 2}
+  - {fileID: 2100000, guid: 7a425f8af4cd1b04aad93ad6d9192cb0, type: 2}
+  - {fileID: 2100000, guid: d04c29c0a78da0d4a8cc43f750c5832f, type: 2}
+  - {fileID: 2100000, guid: 13288b21693b5bb4b96f7ad7721374cb, type: 2}
+  - {fileID: 2100000, guid: 059d0192fa1cbe64090818ad673805e0, type: 2}
   settledThreshold: 0.1
 --- !u!114 &-5558752741929873023
 MonoBehaviour:
