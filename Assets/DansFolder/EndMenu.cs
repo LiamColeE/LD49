@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndMenu : MonoBehaviour
 {
@@ -16,12 +17,13 @@ public class EndMenu : MonoBehaviour
 
     public void SubmitScore()
     {
-        Debug.Log("Submitted score for " + playerName.GetComponentsInChildren<Text>()[1].text);
+        float score = GameManager.instance.score;
+        leaderboard.NewHighScore(playerName.GetComponentsInChildren<Text>()[1].text, GameManager.instance.score);
+    }
 
-        //GameManager.instance.score to get the score
-        float placeholderScore = 2000000000f;
-
-        leaderboard.NewHighScore(playerName.GetComponentsInChildren<Text>()[1].text, placeholderScore);
+    public void Restart()
+    {
+        
     }
 
 }

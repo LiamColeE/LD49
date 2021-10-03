@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Preload.unity
+    guid: 140157972110adf439f2a8b5481c054f
+  - enabled: 1
     path: Assets/DansFolder/DanScene.unity
     guid: be864afed05ddfc4cbd7922a1657f96f
   m_configObjects: {}
