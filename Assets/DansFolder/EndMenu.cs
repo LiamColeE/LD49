@@ -18,7 +18,9 @@ public class EndMenu : MonoBehaviour
     public void SubmitScore()
     {
         float score = GameManager.instance.score;
-        leaderboard.NewHighScore(playerName.GetComponentsInChildren<Text>()[1].text, GameManager.instance.score);
+        leaderboard.AddNewScore(playerName.GetComponentsInChildren<Text>()[1].text, GameManager.instance.score);
+        playerName.Select();
+        playerName.text = "";
     }
 
     public void Restart()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -10,55 +11,61 @@ public class Leaderboard : MonoBehaviour
     public Highscores highscores;
     public List<PlayerEntry> entries = new List<PlayerEntry>();
 
-    public bool resetPlayerPrefs;
+    public Text tryAgainText;
+    public Text goodJobText;
+
+    string getJson;
+
+    float lowestScore;
 
     void Start()
     {
-        if(resetPlayerPrefs)
-            PlayerPrefs.DeleteAll();
-
-        highscores = new Highscores();
-        InitializeHighScores();
-        LoadHighScores();
-        SetEntries();
+        SetColorOfTextToTransparent(tryAgainText, 0f);
+        SetColorOfTextToTransparent(goodJobText, 0f);
+        LoadHighscoresFromAPI();
     }
 
-    public void NewHighScore(string playerName, float highscore)
+    void SetColorOfTextToTransparent(Text text, float alpha)
     {
-        highscores.all.Add(new Highscore(playerName, highscore));
-
-        string json = JsonUtility.ToJson(highscores);
-
-        PlayerPrefs.SetString("Highscores", json);
-        PlayerPrefs.Save();
-        LoadHighScores();
-        SetEntries();
+        text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
     }
 
-    public void LoadHighScores()
+    IEnumerator DisplayTextOverTime(Text text, float rate)
     {
-        string json = PlayerPrefs.GetString("Highscores");
-
-        highscores = JsonUtility.FromJson<Highscores>(json);
-
-        foreach(var v in highscores.all)
+        float holdRate = 0f;
+        while(holdRate < 1)
         {
-            Debug.Log(v.name + ": " + v.score);
+            holdRate += rate;
+            SetColorOfTextToTransparent(text, holdRate);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1);
+
+        while(holdRate > 0)
+        {
+            holdRate -= rate;
+            SetColorOfTextToTransparent(text, holdRate);
+            yield return null;
         }
     }
 
-    public void InitializeHighScores()
+    public void AddNewScore(string playerName, float score)
     {
-        if(PlayerPrefs.GetString("Highscores") == null)
+        if(score > lowestScore)
+            StartCoroutine(Upload("https://cairns-leaderboard.herokuapp.com/add_score/" + playerName + "/" + score, "{ \"name\" : \"" + playerName + "\", \"score\" : \" " + score.ToString() + "\"}"));
+        else
         {
-            PlayerPrefs.SetString("Highscores", "");
-            PlayerPrefs.Save();
+            StartCoroutine(DisplayTextOverTime(tryAgainText, 0.01f));
         }
+    }
+
+    public void LoadHighscoresFromAPI()
+    {
+        StartCoroutine(GetRequest("https://cairns-leaderboard.herokuapp.com/gettop"));
     }
 
     void SetEntries()
     {
-        highscores.all.Sort((p1,p2)=>p2.score.CompareTo(p1.score));
         int place = 0;
         foreach(Highscore hs in highscores.all)
         {
@@ -71,9 +78,9 @@ public class Leaderboard : MonoBehaviour
     public class Highscore
     {
         public string name;
-        public float score;
+        public string score;
 
-        public Highscore(string h, float s)
+        public Highscore(string h, string s)
         {
             name = h;
             score = s;
@@ -84,6 +91,55 @@ public class Leaderboard : MonoBehaviour
     public class Highscores
     {
         public List<Highscore> all = new List<Highscore>();
+    }
+
+    IEnumerator GetRequest(string uri)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
+            switch (webRequest.result)
+            {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
+                    break;
+                case UnityWebRequest.Result.Success:
+                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                    Highscores json = JsonUtility.FromJson<Highscores>("{ \"all\": " + webRequest.downloadHandler.text + "}");
+                    highscores = json;
+                    lowestScore = float.Parse(json.all[json.all.Count - 1].score);
+                    SetEntries();
+                    break;
+            }
+        }
+    }
+
+    IEnumerator Upload(string url, string data)
+    {
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes(data);
+        using (UnityWebRequest www = UnityWebRequest.Put(url, data))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Upload complete!");
+                LoadHighscoresFromAPI();
+            }
+        }
     }
 
 
