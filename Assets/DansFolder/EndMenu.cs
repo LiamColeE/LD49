@@ -23,7 +23,7 @@ public class EndMenu : MonoBehaviour
 
     public void Restart()
     {
-        
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
 }
