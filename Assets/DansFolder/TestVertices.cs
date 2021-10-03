@@ -14,7 +14,8 @@ public class TestVertices : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(GetTrueHeight(), 0.1f);
+        if(mesh != null)
+            Gizmos.DrawSphere(GetTrueHeight(), 0.1f);
     }
  
 
