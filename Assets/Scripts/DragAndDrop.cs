@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class DragAndDrop : MonoBehaviour
 {
     public static DragAndDrop instance;
+    public GameObject rockplosion;
     private bool _mouseState;
     private GameObject target;
     public Vector3 screenSpace;
@@ -149,6 +150,8 @@ public class DragAndDrop : MonoBehaviour
             target = GetClickedObject(out hitInfo);
             if (target != null)
             {
+                GameObject clone = Instantiate(rockplosion);
+                clone.transform.position = target.transform.position;
                 Destroy(target.gameObject);
             }
         }
