@@ -12,7 +12,7 @@ public class Overlay : MonoBehaviour
     {
         scoreStuff.SetActive(false);
         SetColorOfTextToTransparent(mainTitle, 0f);
-        StartCoroutine(DisplayTextOverTime(mainTitle, 0.01f));
+        StartCoroutine(DisplayTextOverTime(mainTitle, 0.1f));
     }
 
     void SetColorOfTextToTransparent(Text text, float alpha)
