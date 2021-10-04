@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class Overlay : MonoBehaviour
 {
     public Text mainTitle;
+    public GameObject scoreStuff;
 
     void Start()
     {
+        scoreStuff.SetActive(false);
         SetColorOfTextToTransparent(mainTitle, 0f);
-        StartCoroutine(DisplayTextOverTime(mainTitle, 0.001f));
+        StartCoroutine(DisplayTextOverTime(mainTitle, 0.01f));
     }
 
     void SetColorOfTextToTransparent(Text text, float alpha)
@@ -35,5 +37,6 @@ public class Overlay : MonoBehaviour
             SetColorOfTextToTransparent(text, holdRate);
             yield return null;
         }
+        scoreStuff.SetActive(true);
     }
 }
