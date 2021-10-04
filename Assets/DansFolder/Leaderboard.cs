@@ -16,7 +16,7 @@ public class Leaderboard : MonoBehaviour
 
     string getJson;
 
-    float lowestScore;
+    float lowestScore = float.NegativeInfinity;
 
     void Start()
     {
@@ -116,7 +116,8 @@ public class Leaderboard : MonoBehaviour
                     Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                     Highscores json = JsonUtility.FromJson<Highscores>("{ \"all\": " + webRequest.downloadHandler.text + "}");
                     highscores = json;
-                    lowestScore = float.Parse(json.all[json.all.Count - 1].score);
+                    if(highscores.all.Count > 0)
+                        lowestScore = float.Parse(json.all[json.all.Count - 1].score);
                     SetEntries();
                     break;
             }
