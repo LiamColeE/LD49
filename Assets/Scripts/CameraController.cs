@@ -54,39 +54,51 @@ public class CameraController : MonoBehaviour
         camera.localPosition = desiredPos;
     }
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
         if (!controlActive)
         {
             moveVector = Vector2.zero;
             return;
         }
-        moveVector = (Vector2)value.Get();
+        moveVector = context.ReadValue<Vector2>();
     }
 
-    public void OnZoom(InputValue value)
+    public void OnZoom(InputAction.CallbackContext context)
     {
         if (DragAndDrop.instance.hasRock || !controlActive)
             return;
 
-        zoom = Mathf.Clamp(zoom + (float)value.Get() * zoomScale,1,10);
+        zoom = Mathf.Clamp(zoom + context.ReadValue<float>() * zoomScale,1,10);
     }
 
-    public void OnToggleControls()
+    public void OnToggleControls(InputAction.CallbackContext context)
     {
-        controlActive = !controlActive;
+        if(context.started)
+            controlActive = !controlActive;
     }
 
-    public void OnOpenMenu()
+    public void OnOpenMenu(InputAction.CallbackContext context)
     {
-        endMenu.gameObject.SetActive(true);
-        GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+        if(context.started)
+        {
+            endMenu.gameObject.SetActive(true);
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+        }
     }
 
-    public void OnCloseMenu()
+    public void OnCloseMenu(InputAction.CallbackContext context)
     {
-        endMenu.gameObject.SetActive(false);
-        GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        if(context.started)
+        {
+            endMenu.gameObject.SetActive(false);
+            GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        }
+    }
+
+    public void OnActiveRotate(InputAction.CallbackContext context)
+    {
+        
     }
     
 }

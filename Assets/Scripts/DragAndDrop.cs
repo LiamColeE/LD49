@@ -93,9 +93,9 @@ public class DragAndDrop : MonoBehaviour
         return 0;
     }
 
-    public void OnClick(InputValue value)
+    public void OnClick(InputAction.CallbackContext context)
     {
-        if (value.isPressed)
+        if (context.performed)
         {
             RaycastHit hitInfo;
             target = GetClickedObject(out hitInfo);
@@ -133,40 +133,43 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-    public void OnMousePos(InputValue value)
+    public void OnMousePos(InputAction.CallbackContext context)
     {
         //Debug.Log(value.Get<Vector2>());
-        mousePos = value.Get<Vector2>();
+        mousePos = context.ReadValue<Vector2>();
     }
 
-    public void OnZoom(InputValue value)
+    public void OnZoom(InputAction.CallbackContext context)
     {
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        depth = Mathf.Clamp(depth + (float)value.Get() * 0.05f, 1, 15);
+        depth = Mathf.Clamp(depth + context.ReadValue<float>()* 0.05f, 1, 15);
 #else
-        depth = Mathf.Clamp(depth + (float)value.Get() * 0.001f, 1, 15);
+        depth = Mathf.Clamp(depth + context.ReadValue<float>() * 0.001f, 1, 15);
 #endif
     }
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
         if (!controlActive)
         {
             rotationVector = Vector2.zero;
             return;
         }
-        rotationVector = value.Get<Vector2>();
+        rotationVector = context.ReadValue<Vector2>();
     }
 
-    public void OnToggleControls()
+    public void OnToggleControls(InputAction.CallbackContext context)
     {
-        controlActive = !controlActive;
+        if(context.started)
+        {
+            controlActive = !controlActive;
+        }
     }
 
-    public void OnRightClick(InputValue value)
+    public void OnRightClick(InputAction.CallbackContext context)
     {
-        if(value.isPressed)
+        if(context.started)
         {
             RaycastHit hitInfo;
             target = GetClickedObject(out hitInfo);
@@ -176,6 +179,19 @@ public class DragAndDrop : MonoBehaviour
                 clone.transform.position = target.transform.position;
                 Destroy(target.gameObject);
             }
+        }
+    }
+
+    public void OnActiveRotate(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            controlActive = true;
+        }
+
+        if(context.canceled)
+        {
+            controlActive = false;
         }
     }
 }
