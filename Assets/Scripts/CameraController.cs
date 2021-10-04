@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        zoomScale = zoomScale * 20;
+        zoomScale = zoomScale * 50;
 #endif
     }
 
