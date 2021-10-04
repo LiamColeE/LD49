@@ -41,7 +41,13 @@ public class DragAndDrop : MonoBehaviour
 
             //update the position of the object in the world
             target.transform.position = curPosition;
-            target.transform.Rotate(new Vector3(rotationVector.y, rotationVector.x, 0) * Time.deltaTime * 40, Space.World);
+            //target.transform.Rotate(new Vector3(rotationVector.y, rotationVector.x, 0) * Time.deltaTime * 40, Space.World);
+
+            if(rotationVector.x != 0)
+                target.transform.rotation = Quaternion.AngleAxis(-rotationVector.normalized.x, Camera.main.transform.forward) * target.transform.rotation;
+            
+            if(rotationVector.y != 0)
+                target.transform.rotation = Quaternion.AngleAxis(rotationVector.normalized.y, Camera.main.transform.right) * target.transform.rotation;
         }
     }
 
