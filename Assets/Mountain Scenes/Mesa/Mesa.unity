@@ -3864,10 +3864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3626844985978806985, guid: a1c5cb21cd8743a48aeea592208500f1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8649507545417396755, guid: a1c5cb21cd8743a48aeea592208500f1, type: 3}
       propertyPath: m_Name
       value: UI_Overlay 1
