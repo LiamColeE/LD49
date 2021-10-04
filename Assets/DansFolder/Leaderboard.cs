@@ -35,7 +35,7 @@ public class Leaderboard : MonoBehaviour
         float holdRate = 0f;
         while(holdRate < 1)
         {
-            holdRate += rate;
+            holdRate += rate * Time.deltaTime;
             SetColorOfTextToTransparent(text, holdRate);
             yield return null;
         }
@@ -43,7 +43,7 @@ public class Leaderboard : MonoBehaviour
 
         while(holdRate > 0)
         {
-            holdRate -= rate;
+            holdRate -= rate * Time.deltaTime;
             SetColorOfTextToTransparent(text, holdRate);
             yield return null;
         }
@@ -55,7 +55,7 @@ public class Leaderboard : MonoBehaviour
             StartCoroutine(Upload("https://cairns-leaderboard.herokuapp.com/add_score/" + playerName + "/" + score, "{ \"name\" : \"" + playerName + "\", \"score\" : \" " + score.ToString() + "\"}"));
         else
         {
-            StartCoroutine(DisplayTextOverTime(tryAgainText, 0.01f));
+            StartCoroutine(DisplayTextOverTime(tryAgainText, 2f));
         }
     }
 
