@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
 
         //transform.position = new Vector3(transform.position.x, (int)GameManager.instance.totalHeight, transform.position.z);
 
+
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
         transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
 

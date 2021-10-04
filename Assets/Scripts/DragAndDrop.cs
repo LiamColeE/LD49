@@ -93,23 +93,32 @@ public class DragAndDrop : MonoBehaviour
             target = GetClickedObject(out hitInfo);
             if (target != null)
             {
-                _mouseState = true;
-                screenSpace = Camera.main.WorldToScreenPoint(target.transform.position);
-                offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, screenSpace.z));
-                depth = screenSpace.z;
+                try
+                {
+                    _mouseState = true;
+                    screenSpace = Camera.main.WorldToScreenPoint(target.transform.position);
+                    offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, screenSpace.z));
+                    depth = screenSpace.z;
 
-                Rigidbody rockrb = target.GetComponent<Rigidbody>();
+                    Rigidbody rockrb = target.GetComponent<Rigidbody>();
 
-                rockrb.useGravity = false;
-                rockrb.isKinematic = true;
-                hasRock = true;
+                    rockrb.useGravity = false;
+                    rockrb.isKinematic = true;
+                    hasRock = true;
+                }
+                catch { }
+              
             }
         }
         else
         {
-            Rigidbody rockrb = target.GetComponent<Rigidbody>();
-            rockrb.useGravity = true;
-            rockrb.isKinematic = false;
+            try
+            {
+                Rigidbody rockrb = target.GetComponent<Rigidbody>();
+                rockrb.useGravity = true;
+                rockrb.isKinematic = false;
+            }
+            catch { }
 
             _mouseState = false;
             hasRock = false;
