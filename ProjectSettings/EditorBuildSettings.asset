@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Preload.unity
+    path: Assets/DansFolder/Preload.unity
     guid: 8547c7c50c8d05d42ace84ddcf68f9ca
   - enabled: 1
     path: Assets/Mountain Scenes/River/Mountain_Vista.unity
