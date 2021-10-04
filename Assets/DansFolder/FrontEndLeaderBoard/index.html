@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cairn Leaderboard</title>
+    <style>
+        table, th, td {
+        border: 1px solid black;
+        }
+    </style>
+    <script type="text/javascript">
+        function reqListener () {
+            console.log(this.responseText);
+            var json = JSON.parse(this.responseText);
+
+            var htmlString = "";
+            var i = 0;
+            json.forEach(element => {
+                htmlString += "<tr><td>" + i + "</td><td>" + element.name + "</td>" + "<td>" + element.score + "</td></tr>";
+                i++;
+            });
+
+            document.getElementById("Leaderboard").innerHTML += "<tr><th>#</th><th>Name</th><th>Score</th></tr>" + htmlString;
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.onload = reqListener;
+        oReq.open("GET", "https://cairns-leaderboard.herokuapp.com/gettop", true);
+        oReq.send();
+    </script>
+</head>
+<body>
+    <table id="Leaderboard">
+        
+    </table>
+</body>
+</html>
