@@ -21,6 +21,8 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         instance = this;
+
+
     }
 
     // Update is called once per frame
@@ -133,7 +135,12 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnZoom(InputValue value)
     {
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        depth = Mathf.Clamp(depth + (float)value.Get() * 0.01f, 1, 15);
+#else
         depth = Mathf.Clamp(depth + (float)value.Get() * 0.001f, 1, 15);
+#endif
     }
 
     public void OnMove(InputValue value)

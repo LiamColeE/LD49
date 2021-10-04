@@ -26,6 +26,9 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        zoom = zoom * 10;
+#endif
     }
 
     // Update is called once per frame
