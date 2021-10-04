@@ -140,4 +140,17 @@ public class DragAndDrop : MonoBehaviour
     {
         controlActive = !controlActive;
     }
+
+    public void OnRightClick(InputValue value)
+    {
+        if(value.isPressed)
+        {
+            RaycastHit hitInfo;
+            target = GetClickedObject(out hitInfo);
+            if (target != null)
+            {
+                Destroy(target.gameObject);
+            }
+        }
+    }
 }

@@ -9,6 +9,8 @@ public class RockSpawner : MonoBehaviour
     [SerializeField] Rock rockPrefab;
     [SerializeField] int spawnLimit;
 
+    List<Rock> rocks = new List<Rock>();
+
     int mySpawnTotal;
     void Start()
     {
@@ -20,10 +22,12 @@ public class RockSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnRate);
 
-        Spawn(transform.position);
+        CleanList();
+        if(rocks.Count < spawnLimit)
+            Spawn(transform.position);
 
-        if(mySpawnTotal < spawnLimit)
-            StartCoroutine(AutoSpawn());
+        StartCoroutine(AutoSpawn());
+        
     }
 
     public void Spawn(Vector3 spawnPosition)
@@ -34,8 +38,20 @@ public class RockSpawner : MonoBehaviour
             
             newRock.transform.position = spawnPosition;
 
-            mySpawnTotal++;
+            rocks.Add(newRock);
         }
+    }
+
+    void CleanList()
+    {
+        List<Rock> newRocks = new List<Rock>();
+        foreach(Rock rock in rocks)
+        {
+            if(rock != null)
+                newRocks.Add(rock);
+        }
+        rocks.Clear();
+        rocks = newRocks;
     }
 
 
