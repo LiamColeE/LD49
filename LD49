@@ -1,0 +1,78 @@
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name ld49.lce.fyi;
+
+	root /home/hosting/Build;
+	index index.html;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+	
+      
+        gzip on;
+        gzip_comp_level 1;
+        gzip_vary on;
+        gzip_types application/wasm application/javascript application/octet-stream-compressible;
+
+        location ~ .+\.(data|symbols\.json)$ {
+            default_type application/octet-stream-compressible;
+        }
+
+        location ~ .+\.wasm$ {
+            # Enable streaming WebAssembly compilation by specifying the correct MIME type for
+            # Wasm files.
+            default_type application/wasm;
+        }
+ 
+        location ~ .+\.(data|symbols\.json)\.br$ {
+            # Because this file is already pre-compressed on disk, disable the on-demand compression on it.
+            # Otherwise nginx would attempt double compression.
+            gzip off;
+            #brotli off;
+            add_header Content-Encoding br;
+            # No special MIME type need to be declared here (can add application/octet-stream
+            # for .data and application/json for .symbols/json if one desires, but that does
+            # not get used for anything, so keep the configuration simple by omitting them)
+        }
+ 
+        location ~ .+\.js\.br$ {
+            gzip off; # Do not attempt dynamic gzip compression on an already compressed file
+            #brotli off;
+            add_header Content-Encoding br;
+            default_type application/javascript;
+        }
+ 
+        location ~ .+\.wasm\.br$ {
+            gzip off; # Do not attempt dynamic gzip compression on an already compressed file
+            #brotli off;
+            add_header Content-Encoding br;
+            # Enable streaming WebAssembly compilation by specifying the correct MIME type for
+            # Wasm files.
+            default_type application/wasm;
+        }
+ 
+        location ~ .+\.(data|symbols\.json)\.gz$ {
+            gzip off; # Do not attempt dynamic gzip compression on an already compressed file
+            #brotli off;
+            add_header Content-Encoding gzip;
+        }
+ 
+        location ~ .+\.js\.gz$ {
+            gzip off; # Do not attempt dynamic gzip compression on an already compressed file
+            #brotli off;
+            add_header Content-Encoding gzip;
+            default_type application/javascript;
+        }
+        
+        location ~ .+\.wasm\.gz$ {
+            gzip off; # Do not attempt dynamic gzip compression on an already compressed file
+            #brotli off;
+            add_header Content-Encoding gzip;
+            # Enable streaming WebAssembly compilation by specifying the correct MIME type for
+            # Wasm files.
+            default_type application/wasm;
+        }	
+}
