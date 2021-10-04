@@ -26,6 +26,9 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        zoomScale = zoomScale * 50;
+#endif
     }
 
     // Update is called once per frame
@@ -35,6 +38,7 @@ public class CameraController : MonoBehaviour
         //    return;
 
         //transform.position = new Vector3(transform.position.x, (int)GameManager.instance.totalHeight, transform.position.z);
+
 
         transform.Rotate(Vector3.up, -moveVector.x * Time.deltaTime * moveSpeed, Space.World);
         transform.Rotate(Vector3.right, -moveVector.y * Time.deltaTime * moveSpeed, Space.Self);
@@ -84,4 +88,5 @@ public class CameraController : MonoBehaviour
         endMenu.gameObject.SetActive(false);
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
+    
 }

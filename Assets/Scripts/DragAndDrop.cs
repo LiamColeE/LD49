@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class DragAndDrop : MonoBehaviour
 {
     public static DragAndDrop instance;
+    public GameObject rockplosion;
     private bool _mouseState;
     private GameObject target;
     public Vector3 screenSpace;
@@ -20,6 +21,8 @@ public class DragAndDrop : MonoBehaviour
     void Start()
     {
         instance = this;
+
+
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class DragAndDrop : MonoBehaviour
 
             //update the position of the object in the world
             target.transform.position = curPosition;
-            target.transform.Rotate(new Vector3(0, rotationVector.y, rotationVector.x), Space.World);
+            target.transform.Rotate(new Vector3(rotationVector.y, rotationVector.x, 0) * Time.deltaTime * 40, Space.World);
         }
     }
 
@@ -92,23 +95,32 @@ public class DragAndDrop : MonoBehaviour
             target = GetClickedObject(out hitInfo);
             if (target != null)
             {
-                _mouseState = true;
-                screenSpace = Camera.main.WorldToScreenPoint(target.transform.position);
-                offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, screenSpace.z));
-                depth = screenSpace.z;
+                try
+                {
+                    _mouseState = true;
+                    screenSpace = Camera.main.WorldToScreenPoint(target.transform.position);
+                    offset = target.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, screenSpace.z));
+                    depth = screenSpace.z;
 
-                Rigidbody rockrb = target.GetComponent<Rigidbody>();
+                    Rigidbody rockrb = target.GetComponent<Rigidbody>();
 
-                rockrb.useGravity = false;
-                rockrb.isKinematic = true;
-                hasRock = true;
+                    rockrb.useGravity = false;
+                    rockrb.isKinematic = true;
+                    hasRock = true;
+                }
+                catch { }
+              
             }
         }
         else
         {
-            Rigidbody rockrb = target.GetComponent<Rigidbody>();
-            rockrb.useGravity = true;
-            rockrb.isKinematic = false;
+            try
+            {
+                Rigidbody rockrb = target.GetComponent<Rigidbody>();
+                rockrb.useGravity = true;
+                rockrb.isKinematic = false;
+            }
+            catch { }
 
             _mouseState = false;
             hasRock = false;
@@ -123,7 +135,12 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnZoom(InputValue value)
     {
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        depth = Mathf.Clamp(depth + (float)value.Get() * 0.05f, 1, 15);
+#else
         depth = Mathf.Clamp(depth + (float)value.Get() * 0.001f, 1, 15);
+#endif
     }
 
     public void OnMove(InputValue value)
@@ -139,5 +156,20 @@ public class DragAndDrop : MonoBehaviour
     public void OnToggleControls()
     {
         controlActive = !controlActive;
+    }
+
+    public void OnRightClick(InputValue value)
+    {
+        if(value.isPressed)
+        {
+            RaycastHit hitInfo;
+            target = GetClickedObject(out hitInfo);
+            if (target != null)
+            {
+                GameObject clone = Instantiate(rockplosion);
+                clone.transform.position = target.transform.position;
+                Destroy(target.gameObject);
+            }
+        }
     }
 }

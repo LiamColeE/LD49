@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1617213380790676630}
   - component: {fileID: 1699657897968073795}
   - component: {fileID: 9044923766433429700}
+  - component: {fileID: 8658836275877388563}
+  - component: {fileID: 6638933153639485087}
   m_Layer: 0
   m_Name: Canyon Sandstone Rocks Pile_LOD0__ul4lehiga
   m_TagString: Untagged
@@ -96,6 +98,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6197117615177631907, guid: 75c5198537a015741ace11f1dc07a054, type: 3}
+--- !u!114 &8658836275877388563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67363673524418519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b276200d4074bb4469ce306be816a5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _target: {fileID: 435563671835119131}
+  _useMaterialComposition: 0
+  _contactMode: 0
+  _highPriority: 0
+--- !u!114 &6638933153639485087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67363673524418519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203a04c7ef891c4ca38ed393c368f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 0
+  _material: {fileID: 11400000, guid: 55301a9ca6044eb449afa3c8ba50e94c, type: 2}
 --- !u!1 &5718742292039979499
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +141,8 @@ GameObject:
   - component: {fileID: 5197482069672078849}
   - component: {fileID: 8323108295698649776}
   - component: {fileID: 8145574399969781956}
+  - component: {fileID: 1449159550449452079}
+  - component: {fileID: 435563671835119131}
   m_Layer: 0
   m_Name: Canyon Sandstone Rocks Pile_LOD4__ul4lehiga
   m_TagString: Untagged
@@ -192,6 +227,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4621306273863953951, guid: 4521521e7e863bd4b9850965f4ceb572, type: 3}
+--- !u!114 &1449159550449452079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718742292039979499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b276200d4074bb4469ce306be816a5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _target: {fileID: 435563671835119131}
+  _useMaterialComposition: 0
+  _contactMode: 0
+  _highPriority: 0
+--- !u!114 &435563671835119131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718742292039979499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203a04c7ef891c4ca38ed393c368f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 0
+  _material: {fileID: 11400000, guid: 55301a9ca6044eb449afa3c8ba50e94c, type: 2}
 --- !u!1 &6952557946610270034
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 6952557946610270034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 21.414604, y: 21.414604, z: 21.414604}
   m_Children:
   - {fileID: 6378765722657714179}
   - {fileID: 5197704808591811492}
@@ -265,6 +331,8 @@ GameObject:
   - component: {fileID: 883937662164786004}
   - component: {fileID: 1381007637679401891}
   - component: {fileID: 330098484242805871}
+  - component: {fileID: 8994785814010243130}
+  - component: {fileID: 6338341378977446321}
   m_Layer: 0
   m_Name: Canyon Sandstone Rocks Pile_LOD2__ul4lehiga
   m_TagString: Untagged
@@ -349,3 +417,34 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5265759537263566567, guid: 0f609579d04e90e4c81648a3ce171607, type: 3}
+--- !u!114 &8994785814010243130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276700715940558223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b276200d4074bb4469ce306be816a5a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enabled: 1
+  _target: {fileID: 435563671835119131}
+  _useMaterialComposition: 0
+  _contactMode: 0
+  _highPriority: 0
+--- !u!114 &6338341378977446321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276700715940558223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203a04c7ef891c4ca38ed393c368f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priority: 0
+  _material: {fileID: 11400000, guid: 55301a9ca6044eb449afa3c8ba50e94c, type: 2}

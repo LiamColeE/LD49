@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            score = (totalHeight * 100) / rocksUsed;
+            score = totalHeight * rocksUsed;
         }
 
         rockCountText.text = "Stones - "  + (int)rocksUsed;
