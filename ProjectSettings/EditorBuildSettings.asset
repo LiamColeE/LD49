@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mountain Scenes/Mesa/Mesa.unity
     guid: 9757a1653dc8ca342b30428bf7c16891
-  - enabled: 1
+  - enabled: 0
     path: Assets/Mountain Scenes/Snowy/Snowy.unity
     guid: 3accdd45481de2f43924e90f6efa106c
   m_configObjects: {}
