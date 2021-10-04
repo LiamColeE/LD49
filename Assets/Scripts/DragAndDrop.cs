@@ -137,7 +137,7 @@ public class DragAndDrop : MonoBehaviour
     {
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        depth = Mathf.Clamp(depth + (float)value.Get() * 0.01f, 1, 15);
+        depth = Mathf.Clamp(depth + (float)value.Get() * 0.02f, 1, 15);
 #else
         depth = Mathf.Clamp(depth + (float)value.Get() * 0.001f, 1, 15);
 #endif
