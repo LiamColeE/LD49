@@ -84,4 +84,5 @@ public class CameraController : MonoBehaviour
         endMenu.gameObject.SetActive(false);
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
+    
 }
