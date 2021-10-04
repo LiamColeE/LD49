@@ -3717,6 +3717,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2120855354233026341, guid: ec4f274a7aecd4d44bdda02fb9dd4279, type: 3}
+      propertyPath: rockplosion
+      value: 
+      objectReference: {fileID: 3088001775618770872, guid: 7ee9acd2791458548933dd442d6a982c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4f274a7aecd4d44bdda02fb9dd4279, type: 3}
 --- !u!1001 &1713541831
