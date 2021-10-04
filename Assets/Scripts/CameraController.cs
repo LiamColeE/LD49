@@ -98,7 +98,15 @@ public class CameraController : MonoBehaviour
 
     public void OnActiveRotate(InputAction.CallbackContext context)
     {
-        
+        if(context.started)
+        {
+            controlActive = false;
+        }
+
+        if(context.canceled)
+        {
+            controlActive = true;
+        }
     }
     
 }
