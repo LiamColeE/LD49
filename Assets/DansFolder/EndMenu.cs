@@ -28,4 +28,9 @@ public class EndMenu : MonoBehaviour
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }
